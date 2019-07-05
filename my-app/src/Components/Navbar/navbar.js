@@ -1,21 +1,18 @@
-import _ from "lodash";
 import React, { Component } from "react";
 import {
     Container,
     Icon,
-    Image,
     Menu,
     Sidebar,
     Responsive
 } from "semantic-ui-react";
+import { Link } from 'react-router-dom';
 
 
 const NavBarMobile = ({
     children,
-    leftItems,
     onPusherClick,
     onToggle,
-    rightItems,
     visible
 }) => (
         <Sidebar.Pushable>
@@ -27,10 +24,10 @@ const NavBarMobile = ({
                 vertical
                 visible={visible}
             >
-                <Menu.Item as='a'>Home</Menu.Item>
-                <Menu.Item as='a'>About Me</Menu.Item>
+                <Menu.Item as={Link} to='/'>Home</Menu.Item>
+                <Menu.Item as={Link} to='/aboutme'>About Me</Menu.Item>
                 <Menu.Item as='a'>Resume</Menu.Item>
-                <Menu.Item as='a'>Contact</Menu.Item>
+                <Menu.Item as={Link} to='/contact'>Contact</Menu.Item>
             </Sidebar>
 
             <Sidebar.Pusher
@@ -46,9 +43,7 @@ const NavBarMobile = ({
                         <Icon name="sidebar" />
                     </Menu.Item>
                     <Menu.Menu position="right">
-                        {_.map(leftItems, item => (
-                            <Menu.Item {...item} />
-                        ))}
+                        <Menu.Item as={Link} to='/'>Aisha A. Jackson</Menu.Item>
                     </Menu.Menu>
                 </Menu>
                 {children}
@@ -56,18 +51,18 @@ const NavBarMobile = ({
         </Sidebar.Pushable>
     );
 
-const NavBarDesktop = ({ leftItems, rightItems }) => (
+const NavBarDesktop = () => (
     <Menu fixed="top" inverted>
         {/* <Menu.Item>
         <Image size="mini" src="logo.img" />
       </Menu.Item> */}
-        {_.map(leftItems, item => (
-            <Menu.Item {...item} />
-        ))}
+        <Menu.Item as={Link} to='/'>Aisha A. Jackson</Menu.Item>
+
         <Menu.Menu position="right">
-            {_.map(rightItems, item => (
-                <Menu.Item {...item} />
-            ))}
+            <Menu.Item as={Link} to='/'>Home</Menu.Item>
+            <Menu.Item as={Link} to='/aboutme'>About Me</Menu.Item>
+            <Menu.Item as='a'>Resume</Menu.Item>
+            <Menu.Item as={Link} to='/contact'>Contact</Menu.Item>
         </Menu.Menu>
     </Menu>
 );
@@ -90,24 +85,22 @@ class NavBar extends Component {
     handleToggle = () => this.setState({ visible: !this.state.visible });
 
     render() {
-        const { children, leftItems, rightItems } = this.props;
+        const { children } = this.props;
         const { visible } = this.state;
 
         return (
             <div>
                 <Responsive {...Responsive.onlyMobile}>
                     <NavBarMobile
-                        leftItems={leftItems}
                         onPusherClick={this.handlePusher}
                         onToggle={this.handleToggle}
-                        rightItems={rightItems}
                         visible={visible}
                     >
                         <NavBarChildren>{children}</NavBarChildren>
                     </NavBarMobile>
                 </Responsive>
                 <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-                    <NavBarDesktop leftItems={leftItems} rightItems={rightItems} />
+                    <NavBarDesktop />
                     <NavBarChildren>{children}</NavBarChildren>
                 </Responsive>
             </div>
