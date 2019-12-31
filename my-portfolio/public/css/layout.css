@@ -804,7 +804,7 @@ call-to-action .button {
    padding-bottom: 102px;
    color: #636363;
 }
-#contact .section-head { margin-bottom: 42px; }
+#contact .section-head { margin-bottom: 42px;}
 
 #contact a, #contact a:visited  { color: #11ABB0; }
 #contact a:hover, #contact a:focus { color: #fff; }
@@ -816,7 +816,7 @@ call-to-action .button {
    color: #EBEEEE;
    margin-bottom: 6px;
 }
-#contact h1 span { display: none; }
+#contact h1 span { display: inline-block; }
 #contact h1:before {
    font-family: 'FontAwesome';
    content: "\f0e0";
@@ -836,6 +836,7 @@ call-to-action .button {
 #contact p.lead {
    font: 18px/36px 'opensans-light', sans-serif;
    padding-right: 3%;
+   padding-top: 5%;
 }
 #contact .header-col { padding-top: 6px; }
 
